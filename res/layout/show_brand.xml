@@ -78,7 +78,7 @@
             android:id="@+id/one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/icon_gallery_point_grey" />
+            android:background="@drawable/icon_gallery_point_white" />
         
         <ImageView
             android:id="@+id/two"

@@ -5,11 +5,13 @@ import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -24,9 +26,10 @@ public class WaueeActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main_wauee);
-
-		//鍒濆鍖栧弬鏁�
+		
 		final Animation in = AnimationUtils.loadAnimation(this, R.anim.in_alpha);
 
 		final Animation out = AnimationUtils.loadAnimation(this, R.anim.out_alpha);
@@ -34,45 +37,57 @@ public class WaueeActivity extends Activity {
 		
 		viewFlipper = (ViewFlipper) ((RelativeLayout) findViewById(R.id.relative)).findViewById(R.id.viewFlipper);
 
-		//寮�鍥剧墖鑷姩鎾斁锛岀涓�釜鏃堕棿涓洪棿闅旀椂闂达紝绗簩涓椂闂存湭鐭�
+		
 		new CountDownTimer(3000,100){
 
+		int id = 1;
 		@Override
 
 		public void onFinish() {
-
+			Log.i("Wauee", "--------------id: " + id + " ---------------------1");
 		viewFlipper.setInAnimation(in);
 
 		viewFlipper.setOutAnimation(out);
 
-		int id = viewFlipper.getId();
 		int content_id = R.id.one;
-		switch(id) {
+		switch(id + 1) {
 		case 1:
 			content_id = R.id.one;
 			break;
 		case 2:
+			((ImageView)((LinearLayout) findViewById(R.id.imageview_id)).findViewById(R.id.one)).setBackgroundResource(R.drawable.icon_gallery_point_grey);
 			content_id = R.id.two;
 			break;
 		case 3:
+			((ImageView)((LinearLayout) findViewById(R.id.imageview_id)).findViewById(R.id.two)).setBackgroundResource(R.drawable.icon_gallery_point_grey);
 			content_id = R.id.three;
 			break;
 		case 4:
+			((ImageView)((LinearLayout) findViewById(R.id.imageview_id)).findViewById(R.id.three)).setBackgroundResource(R.drawable.icon_gallery_point_grey);
 			content_id = R.id.four;
 			break;
 			
 		}
+		
 		((ImageView)((LinearLayout) findViewById(R.id.imageview_id)).findViewById(content_id)).setBackgroundResource(R.drawable.icon_gallery_point_white);
 		
+		id++;
+		if (id > 4) {
+			((ImageView)((LinearLayout) findViewById(R.id.imageview_id)).findViewById(R.id.four)).setBackgroundResource(R.drawable.icon_gallery_point_grey);
+			id = 1;
+			((ImageView)((LinearLayout) findViewById(R.id.imageview_id)).findViewById(R.id.one)).setBackgroundResource(R.drawable.icon_gallery_point_white);
+		}
+		
 		viewFlipper.showNext();
-
+		Log.i("Wauee", "--------------id: " + id + " ---------------------");
 		start();
 
 		}
 
 		@Override
+		public void onTick(long millisUntilFinished) {
 
-		public void onTick(long millisUntilFinished) {}
+		}
 
 		}.start();
 		
