@@ -1,7 +1,8 @@
 package com.wauee.app;
 
-import android.support.v7.app.ActionBarActivity;
+
 import android.support.v4.app.Fragment;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ViewFlipper;
 
-public class WaueeActivity extends ActionBarActivity {
+public class WaueeActivity extends Activity {
 
 	private ViewFlipper viewFlipper;
 	
@@ -25,8 +26,7 @@ public class WaueeActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_wauee);
 
-		//初始化参数
-
+		//鍒濆鍖栧弬鏁�
 		final Animation in = AnimationUtils.loadAnimation(this, R.anim.in_alpha);
 
 		final Animation out = AnimationUtils.loadAnimation(this, R.anim.out_alpha);
@@ -34,8 +34,7 @@ public class WaueeActivity extends ActionBarActivity {
 		
 		viewFlipper = (ViewFlipper) ((RelativeLayout) findViewById(R.id.relative)).findViewById(R.id.viewFlipper);
 
-		//开始图片自动播放，第一个时间为间隔时间，第二个时间未知
-
+		//寮�鍥剧墖鑷姩鎾斁锛岀涓�釜鏃堕棿涓洪棿闅旀椂闂达紝绗簩涓椂闂存湭鐭�
 		new CountDownTimer(3000,100){
 
 		@Override
@@ -63,7 +62,7 @@ public class WaueeActivity extends ActionBarActivity {
 			break;
 			
 		}
-		((ImageView)((LinearLayout) findViewById(R.id.imageview_id)).findViewById(id)).setBackgroundResource(R.drawable.icon_gallery_point_white);
+		((ImageView)((LinearLayout) findViewById(R.id.imageview_id)).findViewById(content_id)).setBackgroundResource(R.drawable.icon_gallery_point_white);
 		
 		viewFlipper.showNext();
 
@@ -77,10 +76,6 @@ public class WaueeActivity extends ActionBarActivity {
 
 		}.start();
 		
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
 	}
 
 	@Override
